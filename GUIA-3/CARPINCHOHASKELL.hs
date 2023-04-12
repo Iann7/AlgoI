@@ -133,4 +133,74 @@ digitoUnidades a = (mod a 10)
 digitoDecenas:: Int->Int
 digitoDecenas a = (digitoUnidades(div a 10))
 
+-- EJERCICIO 3 --
+
+estanRelacionados::Int->Int->Bool
+estanRelacionados a b 
+                    | a==0 && b==0 = False
+                    | (a*a + a*b*k ==0) && (k/=0) && (mod k 1 == 0) = True
+                    | otherwise = False
+                    where k= (div (a*a) ((-a)*b))
+
+-- EJERCICIO 4 a -- 
+
+prodInt::(Float,Float)->(Float,Float)-> Float
+prodInt (a,b) (c,d) = a*c + b*d 
+
+-- EJERCICIO 4 b --
+todoMenor ::(Float,Float)->(Float,Float)-> Bool
+todoMenor (a,b) (c,d)
+                  | (a<c && b<d)  = True
+                  | otherwise = False
+
+-- EJERCICIO 4 c --
+
+distanciaPuntos ::(Float,Float)->(Float,Float)-> Float
+distanciaPuntos (a,b) (c,d) = (rangoFuncion (a,b) - rangoFuncion (c,d))
+                  
+
+rangoFuncion:: (Float,Float)->Float
+rangoFuncion (a,b) = sqrt(a*a + b*b)
+
+-- EJERCICIO 4 d --
+
+sumaTerna ::(Float,Float,Float)-> Float
+sumaTerna (a,b,c) = (a+b+c)
+
+-- EJERCICIO 4 e -- 
+
+sumarSoloMultiplos ::(Int,Int,Int)->Int->Int
+sumarSoloMultiplos (a,b,c) x
+                           | (mod a x == 0) && (mod b x == 0) && (mod c x == 0) = a+b+c
+                           | (mod a x == 0) && (mod b x == 0) = a+b
+                           | (mod a x == 0) && (mod c x == 0) = a+c
+                           | (mod b x == 0) && (mod c x == 0) = b+c
+                           | (mod a x == 0) = a 
+                           | (mod b x == 0) = b
+                           | (mod c x == 0) = c
+
+-- EJERCICIO 4 f -- 
+
+posPrimerPar::(Int,Int,Int)->Int
+posPrimerPar (a,b,c) 
+                 | (mod a 2 == 0) = 0
+                 | (mod b 2 == 0) = 1 
+                 | (mod c 2 == 0) = 2
+                 | otherwise = 4
+
+-- EJERCICIO 4 g --
+
+crearPar::Int->Int->(Int,Int)
+crearPar a b =(a,b)
+
+-- EJERCICIO 4 i --
+
+invertir ::(Int,Int)->(Int,Int)
+invertir (a,b) =(b,a)
+
+
+
+
+
+
 
