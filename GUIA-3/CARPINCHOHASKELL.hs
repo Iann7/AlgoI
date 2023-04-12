@@ -202,15 +202,15 @@ invertir (a,b) =(b,a)
 
 todosMenores::(Int,Int,Int)->Bool
 todosMenores (a,b,c) 
-                  | ((f a) > (g a)) && ((f b) >(g b)) && ((f c)> (g c)) = True
+                  | ((fcinco a) > (gcinco a)) && ((fcinco b) >(gcinco b)) && ((fcinco c)> (gcinco c)) = True
                   | otherwise = False
 
-f:: Int->Int
-f x | x<=7 =(x*x)
+fcinco:: Int->Int
+fcinco x | x<=7 =(x*x)
     | x>7  =(2*x-1)
 
-g:: Int->Int
-g x | (mod x 2 == 0) =(div x 2)
+gcinco:: Int->Int
+gcinco x | (mod x 2 == 0) =(div x 2)
     | otherwise = (3*x+1)
 
 
