@@ -213,9 +213,28 @@ gcinco:: Int->Int
 gcinco x | (mod x 2 == 0) =(div x 2)
     | otherwise = (3*x+1)
 
+-- EJERCICIO 6 -- 
 
+esBisiesto::Int->Bool
+esBisiesto a | (mod a 4 /= 0) || ((mod a 100 == 0) && (mod a 400) /=0) = False
+             | otherwise = True
 
+-- EJERCICIO 7 -- 
 
+distanciaManhattan::(Float,Float,Float)->(Float,Float,Float)->Float
+distanciaManhattan (a,b,c) (d,f,g)
+                          | = absoluto(a-d) + absoluto(b-f) + absoluto(c-g)
 
+-- EJERCICIO 8 -- 
 
+comparar:Int->Int->Int
+comparar a b 
+           | sumaUltimoDosDigitos(a)<sumaUltimoDosDigitos(b) =1
+           | sumaUltimoDosDigitos(a)>sumaUltimoDosDigitos(b) =-1
+           | sumaUltimoDosDigitos(a)=sumaUltimoDosDigitos(b) =-1
 
+sumaUltimoDosDigitos::Int->Int
+sumaUltimoDosDigitos a =(mod a 10) + (mod (div x 10) 10)
+
+-- EJERCICIO 9 -- 
+-- MUCHO TEXTO -- 
