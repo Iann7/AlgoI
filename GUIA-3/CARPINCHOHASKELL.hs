@@ -124,13 +124,13 @@ esMultiploDe a b
 -- EJERCICIO 2 i -- 
 
 digitoUnidades:: Int->Int
-digitoUnidades a =(a mod 10)
+digitoUnidades a = (mod a 10)
 
 
 
 -- EJERCICIO 2 j -- 
 
-digitoUnidades:: Int->Int
-digitoUnidades a =(a mod 10)
+digitoDecenas:: Int->Int
+digitoDecenas a = (digitoUnidades(div a 10))
 
 
