@@ -44,10 +44,10 @@ sumaDigitos a
 -- EJERCICIO 7 -- 
 
 todosDigitosIguales::Int->Bool 
-todosDigitosIguales a
+todosDigitosIguales n
                     | n<10 = True
-                    | mod n 10 = mod(div n 10) = todosDigitosIguales(div n 10)
-                    | otherwise = false 
+                    | mod n 10 == mod (div n 10) 10 = todosDigitosIguales(div n 10)
+                    | otherwise = False 
 -- EJERCICIO 8 -- 
 
 iesimoDigito::Int->Int->Int
@@ -55,7 +55,7 @@ iesimoDigito a b
                 | (a>=0 && b>=1 && b<=cantDigitos a) = iesimoDigito a x
                 | (b==cantDigitos a) = mod a 10 
                 | a == 0 =0
-                where x= div a 10 
+                where x = div a 10 
 
 cantDigitos::Int->Int
 cantDigitos a 
@@ -63,37 +63,53 @@ cantDigitos a
             |  otherwise = 0
 
 -- EJERCICIO 9 --   
-
-esCapicua::Int->Bool
+--AGREGAR SOLUCION IMPARES--
+{-esCapicua::Int->Bool
 esCapicua a 
-           | mod (cantDigitos a) 2 /=0 =false
-           | (iesimoDigito (cantDigitos a) /= iesimoDigito 1) = False 
+           | mod (cantDigitos a) 2 /=0 =False
+           | ((iesimoDigito (cantDigitos a)) /= iesimoDigito 1) = False 
            | (iesimoDigito (cantDigitos a) == iesimoDigito 1) && (cantDigitos a>=4) = esCapicua x 
-           | 
-           where x= (removeLast     (removeFirst a))
+           where x= (removeLast     (removeFirst a))-} 
 
 removeLast::Int->Int
-removeFirst a = a-(iesimoDigito a (cantDigitos a))*10^^(cantDigitos a)
+removeLast a = a-(iesimoDigito a (cantDigitos a))*10^(cantDigitos a)
 
 removeFirst::Int->Int
-removeFirst a = (a mod 10)
+removeFirst a = (mod a 10)
 
 -- EJERCICIO 10 -- 
 
 f1::Int->Int
 f1 0 = 1
-f1 i = 2^^i + f1 i-1 
+f1 i = 2^i + f1 i-1 
 
 f2::Int->Int->Int
 f2 q 1 = q
-f2 q i= q^^i + f2 i-1 
+f2 q i= q^i + f2 q (i-1) 
 
 f3::Int->Int->Int
-f3 q n = f2 q n 
+f3 q n 
+     |  n==1 = q
+     |  n>1 = q^n + f3 q (n-1)
+
 
 f4::Int->Int->Int
-f4 q n = q^^n
-f4 q n = f2 q n 
+f4 q n =f4Loop q n (2*n) 
 
+f4Loop::Int->Int->Int->Int
+f4Loop q n dn | n==dn =2^n
+              | n<dn = 2^n + f4Loop q (n+1) dn
 
-        
+-- EJERCICIO 11 --
+
+eAprox :: Int ->Float
+eAprox n | n==0 =1
+         | n>=1 = fromIntegral 1 / fromIntegral (fact n) + eAprox (n-1)
+
+fact::Int->Int
+fact n | n==0 =1
+       | otherwise = n * fact (n-1)
+
+e::Float
+e=eAprox 10
+
