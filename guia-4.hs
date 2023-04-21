@@ -113,3 +113,67 @@ fact n | n==0 =1
 e::Float
 e=eAprox 10
 
+-- EJERCICIO 14 --  
+
+sumaPotencias :: Integer ->Integer ->Integer ->Integer
+sumaPotencias q n m 
+                    | n==1 = sumaPotenciasAUX q n m
+                    | n>1 = sumaPotenciasAUX q n m + sumaPotencias q (n-1) m
+
+sumaPotenciasAUX :: Integer ->Integer ->Integer ->Integer
+sumaPotenciasAUX q n m 
+                      | m==1 = q^(m+n)
+                      | m>1 = q^(m+n) + sumaPotenciasAUX q n (m-1)
+
+-- EJERCICIO 15 --
+
+sumaRacionales :: Int ->Int ->Float
+sumaRacionales a b | a==1 = sumaRacionalesAUX a b 
+                   | a > 1 = sumaRacionalesAUX a b + sumaRacionalesAUX a (b-1)
+
+sumaRacionalesAUX:: Int->Int->Float
+sumaRacionalesAUX a b | b==1 =  fromIntegral a / fromIntegral b  
+                      | b > 1 =  fromIntegral a / fromIntegral b + sumaRacionalesAUX a (b-1)
+
+-- EJERCICIO 17 -- 
+     
+esFibonacci :: Int->Bool
+esFibonacci n | n==0 =True
+              | n<0 =False
+              | otherwise = esFibonacciAUX 0 1 n
+
+esFibonacciAUX::Int->Int->Int->Bool
+esFibonacciAUX a b num 
+                   | (a+b) == num =True
+                   | (a+b)>num =False
+                   | (a+b)<num && fibonacci b /=num =esFibonacciAUX b c num
+                   where c=a+b
+
+-- EJERCICIO 18 --
+
+mayorDigitoPar:: Integer -> Integer
+mayorDigitoPar a 
+               |  a<10 && mod a 2 ==0 =a
+               |  a<10 && mod a 2 /=0 =(-1)
+               |  x > y =x
+               |  x < y =y
+               |  x == y =x
+               where x = mayorDigitoPar (div a 10)
+                     y = if (mod (mod a 10) 2) == 0 then mod a 10 else -1 
+
+-- EJERCICIO 21 -- 
+
+pitagoras::Int->Int->Int->Int
+pitagoras m n r 
+               | m==0 =x
+               | m>0  =x + pitagoras (m-1) n r
+               where x=pitagorAUX m n r
+
+pitagorAUX::Int->Int->Int->Int
+pitagorAUX m n r 
+               | n==0 && ((m^2 + n^2) <= r^2) =1
+               | n==0 && ((m^2 + n^2) > r^2) =0
+               | n>0 && ((m^2 + n^2) <= r^2) =1+ x
+               | otherwise = x
+               where x= pitagorAUX m (n-1) r
+               
