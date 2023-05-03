@@ -147,3 +147,41 @@ hex2letter x
                  | x==13 = 'D'
                  | x==14 = 'E'
                  | x==15 = 'F'
+
+-- EJERCICIO 5 PRIMOS -- 
+
+descomponerEnPrimos :: [Integer] -> [[Integer]]
+descomponerEnPrimos[] = [[]]
+descomponerEnPrimos (x:xs) = [arrayPrimos x] ++ descomponerEnPrimos xs
+
+
+arrayPrimos :: Integer -> [Integer]
+arrayPrimos a          
+             | division == 1 =[primo]
+             | division /=1  =[primo] ++ arrayPrimos division
+             where primo=primoqueDivida a [2,3,5,7,11,13]
+                   division = div a primo
+
+primoqueDivida:: Integer->[Integer]->Integer 
+primoqueDivida a [] =a
+primoqueDivida a (x:xs)
+                       | (mod a x /= 0) = primoqueDivida a xs 
+                       | (mod a x == 0) = x
+
+-- EJERCICIO 6  a -- 
+
+agregarATodos :: Integer -> [[Integer]] ->[[Integer]]
+agregarATodos a [] = []
+agregarATodos a (x:xs) = [x++[a]] ++ agregarATodos a xs
+
+
+agregarATodosVARIANTE :: Integer -> [[Integer]] ->[[Integer]]
+agregarATodosVARIANTE a [] = []
+agregarATodosVARIANTE a (x:xs) = [a:x] ++ agregarATodosVARIANTE a xs
+
+-- EJERCICIO 6 b -- 
+
+partes::Integer->[[Integer]]
+parte 0 =[[]]
+partes a = agregarATodos a partesMasChico ++ partesMasChico
+          where partesMasChico = partes (a-1)
