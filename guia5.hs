@@ -185,3 +185,14 @@ partes::Integer->[[Integer]]
 parte 0 =[[]]
 partes a = agregarATodos a partesMasChico ++ partesMasChico
           where partesMasChico = partes (a-1)
+
+-- EJERCICIO 6 C -- 
+-- FALTA ASEGURAR QUE NO HAY REPETIDOS --
+
+productoCartesiano :: [Integer] -> [Integer] -> [(Integer, Integer)]
+productoCartesiano [] (y:ys) = []
+productoCartesiano (x:xs) (y:ys) = productoCartesianoAUX x (y:ys) ++ productoCartesiano xs (y:ys)
+
+productoCartesianoAUX :: Integer->[Integer]->[(Integer,Integer)]
+productoCartesianoAUX _ [] = [] 
+productoCartesianoAUX x (y:ys) = [(x,y)] ++ productoCartesianoAUX x ys 
