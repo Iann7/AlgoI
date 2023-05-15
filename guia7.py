@@ -72,8 +72,8 @@ def es_bisiesto(año:int)->bool:
 
 #EJERCICIO 4--------
 def peso_pino(altura_pino:int)->int:
-    mas_de_3m:int = 2*(altura_pino - (altura_pino%3))
-    menos_de_3m:int = 3*(altura_pino%3)
+    mas_de_3m:int = (max(altura_pino,3)-3)*200
+    menos_de_3m:int = min(altura_pino,3)*300
     return mas_de_3m + menos_de_3m
 
 def es_peso_util(pesPino:int)->bool:
