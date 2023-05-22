@@ -1,6 +1,7 @@
 import array 
 import math
 #GUIA 8 
+#PARTE 1
 #EJERCICIO 1 
 def pertenece1(s:list(int),e:int)->bool:
     counter =0
@@ -125,4 +126,17 @@ def noPerteneceA(s:list(chr),i:chr)->bool:
         if i==k: return False
     return True
 
+#SEGUNDA PARTE
+#EJERCICIO 1 
+def borrarIndicesPares(s:list(int))->list(int):
+    for i in range(0,len(s)):
+        if(i%2 == 0): s[i] =0
+    return s
+ 
+#EJERCICIO 2 
+def borrarIndicesPares(s:list(int))->list(int):
+    paramLista:list(int) = s.copy()
+    for i in range(0,len(paramLista)):
+        if(i%2 == 0): paramLista[i] =0
+    return paramLista
 
