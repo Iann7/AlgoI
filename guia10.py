@@ -1,4 +1,9 @@
+from typing import List
 from queue import LifoQueue as Pila
+from queue import Queue as Cola
+import random
+import array
+
 nombre_arch = "archivo.txt"
 #EJERCICIO 1 A
 def contarLineas(nombre_archivo:str)->int:
@@ -48,7 +53,7 @@ def archivoReverso(nombre_archivo:str):
 #EJERCICIO 4
 def agregarALoUltimo(nombre_archivo:str,frase:str):
     archivo = open(nombre_archivo,"a")
-    archivo.write(frase)
+    archivo.write("\n" +frase)
     archivo.close()
  
 #EJERCICIO 5
@@ -98,3 +103,72 @@ def hacerPila()->Pila:
         pilaNueva.put(i)
         continue
     return pilaNueva
+
+def copiarPila(pila_original:Pila)->Pila:
+    listaIntermedia = []
+    pilaCopiar:Pila = Pila()
+    while(pila_original.empty()==False):
+        listaIntermedia.append(pila_original.get)
+    for i in range(0,len(listaIntermedia)):
+        pila_original.put(listaIntermedia[len(listaIntermedia)-1-i])
+        pilaCopiar.put(listaIntermedia[len(listaIntermedia)-1-i])
+
+#EJERCICIO 12:TODO
+
+# COLAS B)
+#EJERCICIO 13 
+
+def generarColaRandom(rang:int)->Cola:
+    agreCola:Cola = Cola()
+    for i in range(rang):
+        agreCola.put(random.randint(0,100))
+    return agreCola
+
+#EJERCICIO 14 
+
+def cantidadElementos(c:Cola)->int:
+    countElementos:int = 0
+    colaCopiada:Cola = copiarCola(c)
+    while(colaCopiada.empty()==False):
+        colaCopiada.get()
+        countElementos +=1
+        continue
+    return countElementos
+
+
+def copiarCola(c:Cola)->Cola:
+    lista_intermedia = []
+    colaNueva:Cola = Cola()
+    while(c.empty()==False):
+        lista_intermedia.append(c.get())
+    for i in range(len(lista_intermedia)):
+        c.put(lista_intermedia[i])
+        colaNueva.put(lista_intermedia[i])
+    return colaNueva
+
+#EJERCICIO 15 
+
+def buscarElMaximo(c:Cola)->int:
+    colaNueva = copiarCola(c)
+    maxValue = colaNueva.get()
+    while(colaNueva.empty() == False):
+        valueParam:int = colaNueva.get()
+        if valueParam>maxValue: maxValue = valueParam
+        continue
+    return maxValue
+
+#EJERCICIO 16 
+def jugarCartonDeBingo(carton:List[int],bolillero:Cola)->int:
+    boliCopia:Cola = copiarCola(bolillero)
+    countBingo:int = 0
+    while(boliCopia.empty() == False or countBingo==len(carton)):
+        boliParam:int = boliCopia.get()
+        if(carton.__contains__(boliParam)):
+            countBingo +=1
+            carton.remove(boliCopia)
+    return boliCopia
+    
+
+
+
+        
