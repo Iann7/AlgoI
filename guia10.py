@@ -5,6 +5,7 @@ import random
 import array
 
 nombre_arch = "archivo.txt"
+#ARCHIVOS
 #EJERCICIO 1 A
 def contarLineas(nombre_archivo:str)->int:
     archivo =open(nombre_archivo,"r")
@@ -65,7 +66,6 @@ def agregarALoPrimero(nombre_archivo:str,frase:str):
     for line in lines:
         archivo.write(line)
     archivo.close()
-agregarALoPrimero(nombre_arch,"HOLA COMO TE VA")
  
 #TODO:EJERCICIO 6
  
@@ -86,9 +86,8 @@ def promedioEstudiante(lu:str)->float:
  
  
  
- 
+#PILAS 
 #EJERCICIO 11
-#TODO: copiar pila  
 def buscarElMaximo(p:Pila)->int:
     maximoElementoSoFar = p.get()
     while(p.empty()==False):
@@ -167,8 +166,84 @@ def jugarCartonDeBingo(carton:List[int],bolillero:Cola)->int:
             countBingo +=1
             carton.remove(boliCopia)
     return boliCopia
+
+#DICCIONARIOS 
+#EJERCICIO 18 
+def agruparPorLongitud(nombre_archivo:str)->dict:
+    palabrasDicc:dict = dict()
+    archivo = open(nombre_archivo,"r")
+    archivoTexto = archivo.read()
+    archivoTexto = archivoTexto.replace("\n"," ")
+    archivoTexto = archivoTexto.split(" ")
+    for palabra in archivoTexto:
+        if palabra =='':continue
+        if pertenece(palabrasDicc.keys(),len(palabra)):
+            palabrasDicc[len(palabra)] +=1
+        else:
+            palabrasDicc[len(palabra)] =1
+    return palabrasDicc
+
+def pertenece(keys:List[int],c:int)->bool:
+    for key in keys:
+        if c==key:return True
+    return False
+
+#EJERCICIO 19 
+def diccionarioPromedio(nombre_archivo:str)->dict:
+    promedioAlumnos:dict = dict()
+    registroNotas:List[List[str]] = []
+    archivo = open(nombre_archivo,"r")
+    lines = archivo.readlines()
+    print(lines)
+    for line in lines: 
+        line = line.replace("\n","")
+        line = line.replace(" ","")
+        splitLine = line.split(",")
+        registroNotas.append(splitLine)
+    for registro in registroNotas:
+        if perteneceString(promedioAlumnos.keys(),registro[0])==False:
+            promedioAlumnos[registro[0]] = conseguirPromedioAlumno(registro[0],registroNotas)
+        else: continue
+    return promedioAlumnos
+           
+
+def conseguirPromedioAlumno(LU:str,registroNotas:List[List[str]])->float:
+    sumaNotas:float = 0
+    totalNotas:float = 0
+    for registro in registroNotas:
+        if LU==registro[0]:
+            sumaNotas += int(registro[3])
+            totalNotas +=1
+    return sumaNotas/totalNotas
+                
+def perteneceString(keys:List[str],c:str)->bool:
+    for key in keys:
+        if c==key:return True
+    return False
+
+#EJERCICIO 20 
+
+def laPalabraMasFrecuente(nombre_archivo:str)->str:
+    dictPalabras:dict = dict()
+    archivo = open(nombre_archivo,"r")
+    archivoText = archivo.read()
+    archivoText = archivoText.replace("\n"," ")
+    archivoText = archivoText.split(" ")
+    for palabra in archivoText:
+        if palabra=='':continue
+        if perteneceString(dictPalabras,palabra) ==False:
+            dictPalabras[palabra] =1
+        else:
+            dictPalabras[palabra] +=1
+    palabraMasFrecuente: str = ""
+    palabraMasFrecuenteFrecuencia:int = -1
+    for key in dictPalabras.keys():
+        if dictPalabras[key] > palabraMasFrecuenteFrecuencia:
+            palabraMasFrecuente = key
+            palabraMasFrecuenteFrecuencia = dictPalabras[key]
+    return palabraMasFrecuente
+
+print(laPalabraMasFrecuente(nombre_arch))
+
     
 
-
-
-        
